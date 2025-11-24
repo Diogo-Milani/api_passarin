@@ -10,7 +10,7 @@ cep: joi.string().length(8).required(),
 cidade: joi.string().max(50).required(),
 bairro: joi.string().max(50).required(),
 complemento: joi.string().max(100).allow(''),
-senha: joi.string().length(255).required(), 
+senha: joi.string().max(255).required(), 
 })
 
 export const clienteUpdateSchema = joi.object({
@@ -22,7 +22,7 @@ export const clienteUpdateSchema = joi.object({
     cidade: joi.string().max(50),
     bairro: joi.string().max(50),
     complemento: joi.string().max(100).allow(''),
-    senha: joi.string().length(255),
+    senha: joi.string().max(255),
 }).min(1);
 
 export const listarClientes = async (req,res) => {

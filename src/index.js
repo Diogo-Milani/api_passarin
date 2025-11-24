@@ -7,6 +7,7 @@ import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import clienteRoutes from './routes/clienteRoutes.js'
+import pedidoRoutes from './routes/pedidoRoutes.js'
 
 import db from './db/db.js'
 
@@ -34,6 +35,8 @@ app.get ('/', (req,res) => {
 
 const apiPrefix = '/api'
 app.use(`${apiPrefix}/cliente`, clienteRoutes)
+
+app.use(`${apiPrefix}/pedidos`, pedidoRoutes)
 
 app.use ((err,req,res,next) => {
     console.error(err.stack)

@@ -2,7 +2,7 @@ import db from  '../db/db.js'
 import bcrypt from 'bcrypt'
 
 export const findAll = async() => {
-    const [result] = await db.query('SELECT * FROM cliente')
+    const [result] = await db.query('SELECT * FROM clientes')
     return result
 }
 
