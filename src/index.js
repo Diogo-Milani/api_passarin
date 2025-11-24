@@ -8,7 +8,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import clienteRoutes from './routes/clienteRoutes.js'
 import pedidoRoutes from './routes/pedidoRoutes.js'
-
+import authRoutes from '../src/routes/authRoutes.js'
 import db from './db/db.js'
 
 const _filename = fileURLToPath(import.meta.url)
@@ -37,6 +37,8 @@ const apiPrefix = '/api'
 app.use(`${apiPrefix}/cliente`, clienteRoutes)
 
 app.use(`${apiPrefix}/pedidos`, pedidoRoutes)
+
+app.use(`${apiPrefix}/login`, authRoutes);
 
 app.use ((err,req,res,next) => {
     console.error(err.stack)
