@@ -7,12 +7,12 @@ export const findAll = async() => {
 }
 
 export const findByCpf = async(cpf) =>  {
-    const [result] = await db.query ('SELECT * FROM cliente WHERE cpf = ?', [cpf])
+    const [result] = await db.query ('SELECT * FROM clientes WHERE cpf = ?', [cpf])
     return result.lenght > 0 ? result [0] : null
 }
 
 export const findByEmail = async(email) => {
-    const [result] = await db.query('SELECT * FROM cliente WHERE email = ?', [email])
+    const [result] = await db.query('SELECT * FROM clientes WHERE email = ?', [email])
     return result.length > 0 ? result [0] : null 
 }
 
@@ -27,7 +27,7 @@ const newCliente = {
 }
 
 
-await db.query('INSERT INTO cliente SET ?',newCliente)
+await db.query('INSERT INTO clientes SET ?',newCliente)
 
 delete newCliente.senha
 return newCliente

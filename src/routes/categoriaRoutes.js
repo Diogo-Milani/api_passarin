@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/', validate(categoriaCreateSchemas), categoriaControllers.adicionarCategoria);
 
 
-//router.use(authMiddleware);
+// router.use(authMiddleware);
 
 router.get('/', categoriaControllers.listarcategoria); 
 
