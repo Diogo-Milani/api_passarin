@@ -1,7 +1,7 @@
 import db from '..//db/db.js'
 
 export const findAll = async (minValor, maxValor, email, idpPedido) => {
-    let sql = 'SELECT * FROM produto';
+    let sql = 'SELECT * FROM pedido';
     const conditions = [];
     const values = [];
 
@@ -25,12 +25,12 @@ export const findAll = async (minValor, maxValor, email, idpPedido) => {
 export const create = async (pedidoData) => {
     const newPedido = pedidoData
 
-    await db.query('INSERT INTO produto SET ?', newPedido)
+    await db.query('INSERT INTO pedido SET ?', newPedido)
     return newPedido
 }
 
-export const update = async(idpPedido, pedidoData) => {
-    const [result] = await db.query ('UPDATE pedido SET ? WHERE idpedido = ?',[idpPedido,pedidoData])
+export const update = async(idPedido, pedidoData) => {
+    const [result] = await db.query ('UPDATE pedido SET ? WHERE idpedido = ?',[idPedido,pedidoData])
     return result.affectedRows > 0
 }
 

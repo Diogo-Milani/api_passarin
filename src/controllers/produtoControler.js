@@ -2,7 +2,6 @@ import * as produtoservice from '../services/produtoServices.js'
 import joi from 'joi'
 
 export const produtoCreateSchema = joi.object({
-    idProduto: joi.string().required(),
     nome: joi.string().max(80).allow(''),
     descricao: joi.string().max(255).allow(''),
     precoUnitario: joi.string().allow(''),
@@ -10,7 +9,6 @@ export const produtoCreateSchema = joi.object({
 })
 
 export const produtoUpdateSchema = joi.object({
-    idProduto: joi.string(),
     nome: joi.string().max(80).allow(''),
     descricao: joi.string().max(255).allow(''),
     precoUnitario: joi.string().allow(''),

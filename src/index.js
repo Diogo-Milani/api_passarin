@@ -11,6 +11,7 @@ import pedidoRoutes from './routes/pedidoRoutes.js'
 import authRoutes from '../src/routes/authRoutes.js'
 import db from './db/db.js'
 import categoriaRoutes from '../src/routes/categoriaRoutes.js'
+import produtoRoutes from '../src/routes/produtoRoutes.js'
 
 const _filename = fileURLToPath(import.meta.url)
 const _dirname = path.dirname(_filename)
@@ -37,11 +38,13 @@ app.get ('/', (req,res) => {
 const apiPrefix = '/api'
 app.use(`${apiPrefix}/cliente`, clienteRoutes)
 
-app.use(`${apiPrefix}/pedidos`, pedidoRoutes)
+app.use(`${apiPrefix}/pedido`, pedidoRoutes)
 
 app.use(`${apiPrefix}/login`, authRoutes);
 
 app.use(`${apiPrefix}/categoria`, categoriaRoutes);
+
+app.use(`${apiPrefix}/produto`, produtoRoutes )
 
 app.use ((err,req,res,next) => {
     console.error(err.stack)
