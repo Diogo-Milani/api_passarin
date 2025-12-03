@@ -1,7 +1,7 @@
 import db from  '../db/db.js'
 
 export const findAll = async (minValor, maxValor, idCategoria, idProduto, idItem) => {
-    let sql = 'SELECT * FROM produto';
+    let sql = 'SELECT * FROM item   ';
     const conditions = [];
     const values = [];
     if (minValor) {

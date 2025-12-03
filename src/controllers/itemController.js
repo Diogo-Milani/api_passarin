@@ -2,14 +2,12 @@ import * as itemservice from '../services/itemServices.js'
 import joi from 'joi'
 
 export const itemCreateSchema = joi.object({
-idItem: joi.string().required(),
 descricao: joi.string().max(50).allow(''),
 idProduto: joi.string().required(),
 idPedido: joi.string().required(),
 })
 
 export const itemUpdateSchema = joi.object({
-idItem: joi.string(),
 descricao: joi.string().max(50).allow(''),
 idProduto: joi.string(),
 idPedido: joi.string(),
