@@ -2,7 +2,6 @@ import * as categoriaService from'../services/categoriaService.js';
 import joi from 'joi'
 
 export const categoriaCreateSchemas= joi.object({
-idCategoria: joi.string().required(),
 nome: joi.string()
 })
 
@@ -33,9 +32,9 @@ console.log("Erro ao buscar:", err);
 res.status(500).json({error: "Erro interno do servidor "});
     }
 };
-    export const adicionarCategoria = async (res, req) =>{
+    export const adicionarCategoria = async (req,res ) =>{
 try{
-    const novaCategoria = await categoriaService.creat(req.body);
+    const novaCategoria = await categoriaService.create(req.body);
     res.status(201).json({message: 'Adicionado com suceso!', data:novaCategoria});
     }catch(err){
         console.log('Erro ao adicionar:', err);
@@ -46,7 +45,7 @@ try{
     }
 };
 
-export const atualizarCategoria = async (res, req)=> {
+export const atualizarCategoria = async (req,res)=> {
     try{
     const {idCategoria} = req.params;
     const update= await categoriaService.update(idCategoria, req.body);
@@ -60,7 +59,7 @@ res.status(500).json({error: "Erro ao atualizar"});
     }
 };
 
-export const deletarCategoria = async (res, req)=> {
+export const deletarCategoria = async (req,res)=> {
     try{
         const {idCategoria} = req.params
         const deleted = await categoriaService.remove(idCategoria);

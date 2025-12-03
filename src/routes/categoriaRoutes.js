@@ -1,5 +1,5 @@
 import express from 'express'
-import * as categoriaControllers from '../controllers/categoriaController.js'
+import * as categoriaControllers from '../controllers/categoriaControllers.js'
 import validate from '../middlewares/validate.js'
 import { categoriaCreateSchemas, categoriaUpdateSchemas } from '../controllers/categoriaControllers.js'
 
@@ -13,11 +13,12 @@ router.post('/', validate(categoriaCreateSchemas), categoriaControllers.adiciona
 
 // router.use(authMiddleware);
 
-router.get('/', categoriaControllers.listarcategoria); 
+router.get('/', categoriaControllers.listarCategoria); 
 
 
 
 
 router.put('/:idCategoria', validate(categoriaUpdateSchemas), categoriaControllers.atualizarCategoria); 
-router.delete('/:idCategoria', categoriaControllers.deletarcategoria);
+router.delete('/:idCategoria', categoriaControllers.deletarCategoria);
+
 export default router; 

@@ -10,6 +10,7 @@ import clienteRoutes from './routes/clienteRoutes.js'
 import pedidoRoutes from './routes/pedidoRoutes.js'
 import authRoutes from '../src/routes/authRoutes.js'
 import db from './db/db.js'
+import categoriaRoutes from '../src/routes/categoriaRoutes.js'
 
 const _filename = fileURLToPath(import.meta.url)
 const _dirname = path.dirname(_filename)
@@ -39,6 +40,8 @@ app.use(`${apiPrefix}/cliente`, clienteRoutes)
 app.use(`${apiPrefix}/pedidos`, pedidoRoutes)
 
 app.use(`${apiPrefix}/login`, authRoutes);
+
+app.use(`${apiPrefix}/categoria`, categoriaRoutes);
 
 app.use ((err,req,res,next) => {
     console.error(err.stack)
