@@ -66,8 +66,8 @@ export const adicionarCliente = async (req,res) => {
 
 export const deletarCliente = async (req,res) => {
     try {
-        const {cpf} = req.params
-        const deleted = await clienteservice.remove(cpf)
+        const {email} = req.params
+        const deleted = await clienteservice.remove(email)
         if(!deleted) {
             return res.status(404).json({error: 'Cliente não encontrado'})
         }
@@ -79,8 +79,8 @@ export const deletarCliente = async (req,res) => {
 
 export const atualizarCliente =  async (req,res) => {
     try {
-        const {cpf} = req.params
-        const updated = await clienteservice.create(req.body)
+        const {email} = req.params
+        const updated = await clienteservice.update(email,req.body)
         if (!updated) {
             return res.status(404).json({error: 'Erro ao atualizar o cliente, não encontrado.'})
         }
@@ -88,5 +88,19 @@ export const atualizarCliente =  async (req,res) => {
     } catch (err) {
         console.error('Erro ao atualizar o cliente, deu pau no server')
         res.status(500).json({error: 'Erro ao atualizar cliente'})
+    }
+}
+
+export const listarClientesEmail = async (req,res) => {
+    try {
+        const {email} = req.params
+        const cliente = await clienteservice.findByEmail(email)
+        if (!cliente) {
+            return res.status(404).json({error: 'Cliente não encontrado'})
+        }
+        res.status(200).json(cliente)
+    } catch (err) {
+        console.error('Error ao buscar cliente',err)
+        res.status(500).json ({error: 'Erro interno do servidor'})
     }
 }

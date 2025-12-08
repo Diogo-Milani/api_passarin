@@ -33,16 +33,16 @@ delete newCliente.senha
 return newCliente
 }
 
-export const update = async (cpf,clienteData) => {
+export const update = async (email, clienteData) => {
     if (clienteData.senha) {
         const saltRounds = 10
         clienteData.senha = await bcrypt.hash(clienteData.senha, saltRounds)
     }
-    const [result] = await db.query ('UPDATE cliente SET ? WHERE cpf = ?', [clienteData,cpf])
+    const [result] = await db.query ('UPDATE clientes SET ? WHERE email = ?', [clienteData,email])
 return result.affectedRows > 0
 }
 
 export const remove = async (email) => {
-    const [result] = await db.query('DELETE FROM cliente WHERE email = ?', [email])
+    const [result] = await db.query('DELETE FROM clientes WHERE email = ?', [email])
     return result.affectedRows > 0
 }

@@ -12,9 +12,9 @@ router.post('/', validate (clienteCreateSchema), clienteController.adicionarClie
 router.use(authMiddleware)
 
 router.get('/', clienteController.listarClientes);
-router.get('/:cpf' ,clienteController.listarClientesCpf);
+router.get('/:email' ,clienteController.listarClientesEmail);
 
-router.put('/:cpf' , validate(clienteUpdateSchema), clienteController.atualizarCliente);
-router.delete('/:cpf', clienteController.deletarCliente);
+router.put('/:email' , validate(clienteUpdateSchema), clienteController.atualizarCliente);
+router.delete('/:email', clienteController.deletarCliente);
 
 export default router
