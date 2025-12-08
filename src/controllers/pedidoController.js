@@ -2,21 +2,21 @@ import * as pedidoService from '../services/pedidoServices.js'
 import Joi from 'joi'
 
 export const pedidoCreateSchema = Joi.object({
-dataEhora: Joi.string().required(),
 quantidade: Joi.string().required().max(255),
 formaPagamento: Joi.string().required().max(20),
 statusPedido: Joi.string().max(30).allow(''),
 precoTotal: Joi.string().allow(''),
-email: Joi.string().required().max(50).email()
+email: Joi.string().required().max(50).email(),
+dataPedido: Joi.string().required(),
 })
 
 export const pedidoUpdateSchema = Joi.object({
-dataEhora: Joi.string(),
 quantidade: Joi.string().max(255),
 formaPagamento: Joi.string().max(20),
 statusPedido: Joi.string().max(30),
 precoTotal: Joi.string(),
-email: Joi.string().max(50).email()
+email: Joi.string().max(50).email(),
+dataPedido: Joi.string(),
 }).min(1);
 
 export const listarPedidos = async (req,res) => {
@@ -36,7 +36,7 @@ export const listarPedidos = async (req,res) => {
 export const listarPedidosId = async (req,res) => {
     try {
         const {idPedido} = req.params
-        const pedido = await pedidoService.findByIdPedido(pedido)
+        const pedido = await pedidoService.findByIdPedido(idPedido)
         if(!pedido) {
             return res.status(404).json({error: 'Erro ao buscar ID do pedido'})
         }
@@ -50,6 +50,7 @@ export const listarPedidosId = async (req,res) => {
 export const atualizarPedido = async (req,res) => {
     try {
         const {idPedido} = req.params
+        console.log(idPedido)
         const updated = await pedidoService.update(idPedido,req.body)
         if (!updated) {
             return res.status(404).json({error: 'Pedido não encontrado'})

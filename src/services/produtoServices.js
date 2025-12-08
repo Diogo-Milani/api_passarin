@@ -1,6 +1,6 @@
 import db from  '../db/db.js'
 
-export const findAll = async (minValor, maxValor, idCategoria, idProduto) => {
+export const findAll = async (minValor, maxValor, idProduto) => {
     let sql = 'SELECT * FROM produto';
     const conditions = [];
     const values = [];
@@ -12,14 +12,7 @@ export const findAll = async (minValor, maxValor, idCategoria, idProduto) => {
         conditions.push('valor <= ?');
         values.push(maxValor);
     }
-    if (idProduto) {
-        conditions.push('idProduto = ?');
-        values.push(idProduto);
-    }
-    if (idCategoria) {
-        conditions.push('LOWER(nome) LIKE ?');
-        values.push(`%${nome.toLowerCase()}%`);
-    }
+    
 
     if (conditions.length > 0) {
         sql += ' WHERE ' + conditions.join(' AND ');
@@ -42,6 +35,11 @@ export const update = async (idProduto, produtoData) => {
 };
 
 export const remove = async (idProduto) => {
-    const [result] = await db.query('DELET FROM produto WHERE idProduto = ?', [idProduto]);
+    const [result] = await db.query('DELETE FROM produto WHERE idProduto = ?', [idProduto]);
     return result.affectedRows > 0;
 };
+
+export const findByIdProduto = async(idProduto) =>  {
+    const [result] = await db.query ('SELECT * FROM produto WHERE idProduto = ?', [idProduto])
+    return result
+}

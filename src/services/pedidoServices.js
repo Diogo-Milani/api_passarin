@@ -9,10 +9,6 @@ export const findAll = async (minValor, maxValor, email, idpPedido) => {
         conditions.push('email = ?')
         values.push(email)  
 }
-    if (idpPedido) {
-        conditions.push('idPedido = ?')
-        values.push(idpPedido)
-    }
 
     if (conditions.length > 0) {
         sql += 'WHERE' + conditions.join('AND');
@@ -30,7 +26,16 @@ export const create = async (pedidoData) => {
 }
 
 export const update = async(idPedido, pedidoData) => {
-    const [result] = await db.query ('UPDATE pedido SET ? WHERE idpedido = ?',[idPedido,pedidoData])
+    const [result] = await db.query ('UPDATE pedido SET ? WHERE idPedido = ?',[pedidoData,idPedido])
     return result.affectedRows > 0
 }
 
+export const findByIdPedido = async(idPedido) =>  {
+    const [result] = await db.query ('SELECT * FROM pedido WHERE idPedido = ?', [idPedido])
+    return result
+}
+
+export const remove = async (idPedido) => {
+    const [result] = await db.query('DELETE FROM pedido WHERE idPedido = ?', [idPedido]);
+    return result.affectedRows > 0;
+};

@@ -1,4 +1,4 @@
-import * as produtoservice from '../services/produtoServices.js'
+import * as produtoServices from '../services/produtoServices.js'
 import joi from 'joi'
 
 export const produtoCreateSchema = joi.object({
@@ -17,7 +17,7 @@ export const produtoUpdateSchema = joi.object({
 
 export const listarProduto = async (req,res) => {
     try {
-        const produto = await produtoservice.findAll()
+        const produto = await produtoServices.findAll()
         res.status(200).json(produto)
     } catch (err) {
         console.error('Erro ao buscar produto',err)
@@ -28,7 +28,7 @@ export const listarProduto = async (req,res) => {
 export const listaridProduto = async (req,res) => {
     try {
         const {idProduto} = req.params
-        const produto = await produtoservice.findByidProduto(idProduto)
+        const produto = await produtoServices.findByIdProduto(idProduto)
         if (!produto) {
             return res.status(404).json({error: 'Produto não encontrado'})
         }
@@ -41,7 +41,7 @@ export const listaridProduto = async (req,res) => {
 
 export const adicionarProduto = async (req,res) => {
     try {
-        const novoProduto = await produtoservice.create(req.body)
+        const novoProduto = await produtoServices.update(req.body)
         res.status(201).json({message: 'Produto adicionado com sucesso', data: novoProduto})
     } catch (err) {
         console.error ('Erro ao adicionar produto',err);
@@ -55,7 +55,7 @@ export const adicionarProduto = async (req,res) => {
 export const deletarProduto = async (req,res) => {
     try {
         const {idProduto} = req.params
-        const deleted = await produtoservice.remove(idProduto)
+        const deleted = await produtoServices.remove(idProduto)
         if(!deleted) {
             return res.status(404).json({error: 'Produto não encontrado'})
         }
@@ -68,7 +68,7 @@ export const deletarProduto = async (req,res) => {
 export const atualizarProduto =  async (req,res) => {
     try {
         const {idProduto} = req.params
-        const updated = await produtoservice.create(req.body)
+        const updated = await produtoServices.update(idProduto, req.body)
         if (!updated) {
             return res.status(404).json({error: 'Erro ao atualizar o produto, não encontrado.'})
         }

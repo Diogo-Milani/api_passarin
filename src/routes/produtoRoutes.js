@@ -1,7 +1,7 @@
 import express from 'express'
-import * as produtoController from '../controllers/produtoControler.js'
+import * as produtoController from '../controllers/produtoController.js'
 import validate from '../middlewares/validate.js'
-import { produtoCreateSchema, produtoUpdateSchema } from '../controllers/produtoControler.js'
+import { produtoCreateSchema, produtoUpdateSchema } from '../controllers/produtoController.js'
 
 // import authMiddleware from  '../middlewares/authMiddleware.js'
 
