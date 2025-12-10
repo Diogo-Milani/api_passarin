@@ -41,7 +41,7 @@ export const listaridProduto = async (req,res) => {
 
 export const adicionarProduto = async (req,res) => {
     try {
-        const novoProduto = await produtoServices.update(req.body)
+        const novoProduto = await produtoServices.create(req.body)
         res.status(201).json({message: 'Produto adicionado com sucesso', data: novoProduto})
     } catch (err) {
         console.error ('Erro ao adicionar produto',err);
