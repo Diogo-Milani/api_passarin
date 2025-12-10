@@ -31,7 +31,7 @@ export const create = async (produtoData) => {
 
 export const update = async (idProduto, produtoData) => {
     const [result] = await db.query('UPDATE produto SET ? WHERE idProduto = ?', [produtoData, idProduto]);
-    return result.affectedRows > 0;
+    return result
 };
 
 export const remove = async (idProduto) => {

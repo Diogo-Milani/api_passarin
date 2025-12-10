@@ -20,10 +20,6 @@ export const findAll = async (minValor, maxValor, idCategoria, idProduto, idItem
         conditions.push('idCategoria = ?');
         values.push(idCategoria)
     }
-    if (idItem) {
-        conditions.push('idItem = ?');
-        values.push(idItem)
-    }
 
     if (conditions.length > 0) {
         sql += ' WHERE ' + conditions.join(' AND ');
@@ -41,11 +37,16 @@ export const create = async (itemData) => {
 };
 
 export const update = async (idItem, itemData) => {
-    const [result] = await db.query('UPDATE item SET ? WHERE idItem = ?', [itemData, idItem]);
+    const [result] = await db.query('UPDATE item SET ? WHERE idItem = ?', [itemData, idItem ]);
     return result.affectedRows > 0;
 };
 
 export const remove = async (idItem) => {
-    const [result] = await db.query('DELET FROM item WHERE idItem = ?', [idItem]);
+    const [result] = await db.query('DELETE FROM item WHERE idItem = ?', [idItem]);
     return result.affectedRows > 0;
 };
+
+export const findByIdItem = async(idItem) =>  {
+    const [result] = await db.query ('SELECT * FROM item WHERE idItem = ?', [idItem])
+    return result
+}

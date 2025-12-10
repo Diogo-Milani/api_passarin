@@ -7,7 +7,7 @@ export const findAll = async () => {
 };
 
 export const findByidCategoria = async(idCategoria) => {
-const [result]= await db.query('SELECT * FROM cliente WHERE idCategoria = ? ', [idCategoria]);
+const [result]= await db.query('SELECT * FROM categoria WHERE idCategoria = ? ', [idCategoria]);
 return result.length>0 ? result[0] : null;
 };
 
@@ -30,6 +30,6 @@ export const update = async (idCategoria, categoriaData) => {
 };
 
 export const remove = async (idCategoria) => {
-    const [result] = await db.query(' DELETE FROM pedido WHERE idCategoria = ? ', [idCategoria]);
+    const [result] = await db.query(' DELETE FROM categoria WHERE idCategoria = ? ', [idCategoria]);
     return result.affectedRows > 0;
 };

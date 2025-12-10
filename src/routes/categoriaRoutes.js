@@ -14,6 +14,7 @@ router.post('/', validate(categoriaCreateSchemas), categoriaControllers.adiciona
 // router.use(authMiddleware);
 
 router.get('/', categoriaControllers.listarCategoria); 
+router.get('/:idCategoria', categoriaControllers.listarCategoriaId)
 
 
 

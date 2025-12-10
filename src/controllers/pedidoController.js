@@ -50,7 +50,6 @@ export const listarPedidosId = async (req,res) => {
 export const atualizarPedido = async (req,res) => {
     try {
         const {idPedido} = req.params
-        console.log(idPedido)
         const updated = await pedidoService.update(idPedido,req.body)
         if (!updated) {
             return res.status(404).json({error: 'Pedido não encontrado'})

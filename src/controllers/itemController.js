@@ -1,16 +1,19 @@
+import Joi from 'joi';
 import * as itemservice from '../services/itemServices.js'
 import joi from 'joi'
 
 export const itemCreateSchema = joi.object({
-descricao: joi.string().max(50).allow(''),
 idProduto: joi.string().required(),
 idPedido: joi.string().required(),
+qtd: Joi.string().required(),
+valorParcial: Joi.string().required()
 })
 
 export const itemUpdateSchema = joi.object({
-descricao: joi.string().max(50).allow(''),
 idProduto: joi.string(),
 idPedido: joi.string(),
+qtd: Joi.string(),
+valorParcial: Joi.string()
 }).min(1);
 
 export const listarItem = async (req,res) => {
@@ -38,8 +41,8 @@ export const adicionarItem = async (req,res) => {
 
 export const deletarItem = async (req,res) => {
     try {
-        const {item} = req.params
-        const deleted = await itemservice.remove(item)
+        const {idItem} = req.params
+        const deleted = await itemservice.remove(idItem)
         if(!deleted) {
             return res.status(404).json({error: 'Item não encontrado'})
         }
@@ -51,8 +54,8 @@ export const deletarItem = async (req,res) => {
 
 export const atualizarItem =  async (req,res) => {
     try {
-        const {item} = req.params
-        const updated = await itemservice.create(req.body, item)
+        const {idItem} = req.params
+        const updated = await itemservice.update(idItem, req.body)
         if (!updated) {
             return res.status(404).json({error: 'Erro ao atualizar o item, não encontrado.'})
         }
@@ -63,3 +66,16 @@ export const atualizarItem =  async (req,res) => {
     }
 }
 
+export const listarIdItem = async (req,res) => {
+    try {
+        const {idItem} = req.params
+        const item = await itemservice.findByIdItem(idItem)
+        if (!item) {
+            return res.status(404).json({error: 'item não encontrado'})
+        }
+        res.status(200).json(item)
+    } catch (err) {
+        console.error('Error ao buscar item',err)
+        res.status(500).json ({error: 'Erro interno do servidor'})
+    }
+}

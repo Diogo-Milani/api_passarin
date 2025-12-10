@@ -10,9 +10,9 @@ const router = express.Router()
 router.post('/', validate (itemCreateSchema), itemController.adicionarItem);
 
 router.get('/', itemController.listarItem);
-router.get('/:item', itemController.listarItem);
+router.get('/:idItem', itemController.listarIdItem);
 
-router.put('/:item', validate(itemUpdateSchema), itemController.atualizarItem);
-router.delete('/:item', itemController.deletarItem);
+router.put('/:idItem', validate(itemUpdateSchema), itemController.atualizarItem);
+router.delete('/:idItem', itemController.deletarItem);
 
 export default router
